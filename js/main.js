@@ -14,7 +14,7 @@
 //                   {key:'M', value: 2},
 //                   {key:'N', value: 1},  ]
 
-const cards = [0,0,0,0,0,0,1,1,1,1,1,1,2,2,2,2,2,2,3,3,3,3,3,3,4,4,4,4,4,4,5,5,5,5,5,5,6,6,6,6,6,6,7,7,7,7,7,7,8,8,8,8,8,8,9,9,9,9,9,9,10,10,10,10,10,10,11,11,11,11,11,11,12,12,12,12,12,12,13,13,13,13,13,13,14,14,14,14,14,14]
+const cards = [0,0,0,0,0,0,1,1,1,1,1,1,2,2,2,2,2,2,3,3,3,3,3,3,4,4,4,4,4,4,5,5,5,5,5,5,6,6,6,6,6,6,7,7,7,7,7,7,8,8,8,8,8,8,9,9,9,9,9,9,10,10,10,10,10,10,11,11,11,11,11,11,12,12,12,12,12,12,13,13,13,13,13,13,14,14,14,14,14,14,15,15,15,15,15,15,16,16,16,16,16,16,17,17,17,17,17,17,18,18,18,18,18,18,19,19,19,19,19,19]
 
 
 //========STATE VARIABLES========//
@@ -36,13 +36,18 @@ let warField = []
         //this is where the elements would be grabbed from the HTML to be used in JS
 const playAgain = document.getElementById('replay')
 const startGame = document.getElementById('start')
+const messageEl = document.querySelector('h2')
+const deckEl = document.getElementById("player")
+const cardFlip = document.getElementById("draw")
 
 
 //========EVENT LISTENERS========//
         // this will be where I will state the event listener for the player and also at the end of the game, I will state an event listener for the "play again" button.
 
-// document.getElementById('start')
-//         .addEventListener('click', handleClick)
+document.getElementById('start')
+        .addEventListener('click', handleClick)
+
+        document.getElementById("draw").addEventListener('click', handleDraw)
 
 
 
@@ -51,15 +56,13 @@ const startGame = document.getElementById('start')
 //========FUNCTIONS========//
 // init();
 
+function handleClick(evt) {
+        if(evt.target.tagName !== 'BUTTON') {
+                return;
+        }
 
-// function handleClick(evt) {
-//         if(evt.target.tagName !== h1){
-//                 return;
-//         }
-
-        
         dealCards(cards)
-                function dealCards(cards) {
+        function dealCards(cards) {
                 let count = 0
         while(cards.length) {
                 let randomCard = Math.floor(Math.random() * (cards.length))
@@ -70,61 +73,92 @@ const startGame = document.getElementById('start')
                 compDeck.push(card)
         }
         count++
-                }
+        }
+   }
 
 }
-let playerVal, compVal, playerWarCards, compWarCards
+
+let playerVal, compVal, playerWarCards = [], compWarCards = [];
 
 
 
-function drawCard() {
-       let playerDraw = playerDeck.splice(0,1);
-       playerVal = playerDraw[0]
-       let compDraw = compDeck.splice(0,1);
+function handleDraw(evt) {
+        if (evt.target.tagName === 'BUTTON') 
+        drawCard()
+        function drawCard() {
+                let playerDraw = playerDeck.splice(0,1);
+        playerVal = playerDraw[0]
+                let compDraw = compDeck.splice(0,1);
         compVal = compDraw[0]
+        console.log(playerVal)
+        console.log(compVal)
+        console.log(playerDeck)
+        console.log(compDeck)
+        console.log(playerSideDeck)
+        console.log(compSideDeck)
         compareCards();
+   }
 }
-
-
 
 
 function compareCards() {
        
-        if(playerVal > compVal){
-               playerSideDeck.push(playerVal , compVal)
+        if (playerVal > compVal) {
+                messageEl.textContent = "Player PoKemon wins!"
+                playerSideDeck.push(playerVal , compVal)
+        
+               if (compDeck.length  === 0 && playerSideDeck.length > compSideDeck.length) {
+                messageEl.textContent = "You are the PokeWar Master!"
+           }
+           console.log(warField);
                if (warField.length !== 0) {
                        warField.forEach( v => {
                                playerSideDeck.push(v);
                        })
+
                        warField = [];
                }
        } else if (compVal > playerVal) {
-               compSideDeck.push(playerVal, compVal)
+                messageEl.textContent = "Computer PoKemon wins!"
+                compSideDeck.push(playerVal, compVal)
+
+               if (playerDeck.length === 0 && compSideDeck.length > playerSideDeck.length) {
+                messageEl.textContent = "Computer is the PokeWar Master!"
+               }
+               console.log(warField);
                if (warField.length !== 0) {
                         warField.forEach( v => {
                                 compSideDeck.push(v);
                         })
+                        
                         warField = [];
                 }
        } else if (playerVal === compVal) {
-        tie()
-              
-       }
+                messageEl.textContent = "WAR!"
 
+                tie()
+        }      
+    
 }
 
 // create the tie function 
 function tie() {
+        console.log('tie');
         warField.push(playerVal, compVal);
-        playerWarCards = playerDeck.splice(0,4)
-        compWarCards = compDeck.splice(0,4)
+        
+        if(playerDeck.length >= 5) {
+                playerWarCards = playerDeck.splice(0,4)
+        }
+        if(compDeck.length >= 5) {
+                compWarCards = compDeck.splice(0,4)
+        }
         playerWarCards.forEach(v => {
             warField.push(v)
         })
         compWarCards.forEach(v => {
             warField.push(v)
         })
-        drawCard()
+
 
 }
 
