@@ -1,8 +1,9 @@
 body {
     color: white;
     background-color: black;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
+    height: 100%;
 }
 
 header {
@@ -10,13 +11,16 @@ header {
     font-size: 30px;
     font-family: fantasy;
 }
+h2{
+    text-align: center;
+}
 
 .left {
     background-color: lightgreen;
     position: absolute;
     left: 0px;
     width: 49.5%;
-    height: 100%
+    height: 80%
 }
   
 .right {
@@ -24,11 +28,11 @@ header {
     position: absolute;
     right: 0px;
     width: 49.5%;
-    height: 100%
+    height: 80%
     
 }
 
-.circle {
+/* .circle {
     position: absolute;
     z-index: 15;
     top: 29%;
@@ -42,19 +46,37 @@ header {
     outline-color: black; 
     
     
-}
+} */
 
 
-#backofcard {
+#backofcard1, #backofcard2 {
     height: 250px;
     width: 190px
 }
 
 #comphead {
     float: right;
-
+    display: inline-grid;
+    margin-right: 30px;
+    margin-top: 120px
 }
 
-#player {
+#playerhead {
     float: left;
+    display: inline-grid;
+    margin-left: 30px;
+    margin-top: 120px;
+}
+
+.PcardImage{
+    text-align: center;
+    margin-top: 300px;
+    float: right;
+    margin-right: 120px;
+}
+.CcardImage{
+    text-align: center;
+    margin-top: 300px;
+    float: left;
+    margin-left: 120px;
 }
