@@ -17,7 +17,6 @@ var compWarCards=[];
 
 
 //========CACHED ELEMENTS========//
-//this is where the elements would be grabbed from the HTML to be used in JS
 
 let startGame = document.getElementById('start')
 let cardFlip = document.getElementById("draw")
@@ -57,7 +56,6 @@ function init() {
 }
 
 //========EVENT LISTENERS========//
-        // this will be the area where I will state the event listener for the player and also at the end of the game, I will state an event listener for the "play again" button, as well as, drawing each card from deck to be compared.
 
 startGame.addEventListener('click', handleStart)
 
@@ -68,7 +66,6 @@ playAgain.addEventListener('click', init)
 
 
 //========FUNCTIONS========//
-        // this is where my functions will be ran.
 
 function handleStart(evt) {
         if(evt.target.tagName !== 'BUTTON') {
@@ -233,27 +230,3 @@ function tie() {
         }
         
 }
-
-        //at start of game, a deck of 114 cards (19 different cards of 6 each) gets dealt to both players evenly (57 cards to each player).
-
-        //with each turn a card is fliped face up from each player's decks and gets compared based of their value.
-
-        //if playerCard > compCard, player wins the battle and takes both cards and places them next to his/her current playing deck, into a pile called "TOTAL CARDS WON".
-        
-        //if playerCard < compCard, comp wins the battle and takes both cards and are placed next to it's current playing deck, into a pile called "TOTAL CARDS WON".
-
-        //if playerCard === compCard, "WAR" is declared.  Top 4 cards from each deck will be placed in the  "Warfield" and the 5th card will be fliped face up to declare the winner.  The winner receives all the cards played that round, total of 12.
-
-        //if tie occurs again, 4 more cards will be added and 5th card will be flipped face up to declare a winner, and so on so forth, until a winner is met. 
-
-        //if playerCard === compCard and each player has <=4 cards remaining in their Deck Count, the players draw a card from their deck to see who wins the current cards and the previous 2 cards that were originally tied.
-
-        //game goes on until both players have no more cards left in their Deck Count, which at that point the winner of WAR is declared based on who has more cards in their "TOTAL CARDS WON" pile.
-
-//========DISPLAYED MESSAGES========//
-
-        // this is where the massage will be displayed of who won the card battle, or   the whole game
-
-
-//========DISPLAY IMAGES========//
-        //if I have some images, I will include them during the game.
