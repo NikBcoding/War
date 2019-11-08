@@ -9,6 +9,8 @@ This is the basic outline of my game
 ![alt](https://i.imgur.com/YL8ww8v.png)
 
 
+RULES OF THE GAME (PokeWar)
+	
 	≈At start of game, a deck of 114 cards (19 different cards of 6 
 	each) gets dealt to both players evenly (57 cards to each 
 	player).
@@ -42,3 +44,17 @@ This is the basic outline of my game
 	their Deck Count, which at that point the winner of WAR is 
 	declared based on who has more cards in their "TOTAL CARDS 
 	WON" pile.
+	
+	
+	
+	
+TECHNOLOGIES
+
+	HTML
+	CSS
+	JavaScript
+	
+
+NEXT STEPS
+
+	I want to inclide some sound, include more pokemon, add some minor 	animations thats show a pokeball fly when a card is being drawn, as 	well as showing cartoon face of Ash Ketchum either have a happy 	face or a sad face depending on if he won or lost.
