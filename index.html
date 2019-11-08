@@ -12,21 +12,29 @@
     
     <div class='circle'></div>
     <header>POKeWAR</header>
-    <h2>HIT PLAY</h2>
+    <h2 id='steps'>HIT PLAY</h2>
+    <h2 id='whowins'></h2>
+
     <button id="start">PLAY</button>
     <button id="draw">I Choose you!</button>
     <button id="replay">Play Again</button>
     </section>
+        
         <div class="left">
-                <h1 id="playerhead">player<img id='backofcard1' src="images/backofpokemoncard.jpg" alt="hello"></h1>
-                <div class="PcardImage">Pimage</div>
+            
+                <h1 id="playerhead">You<img id='backofcard1' src="images/backofpokemoncard.jpg" alt="hello"></h1>
+                <div class="PcardImage"></div>
+                <p id='playerScore'>playercounter</p>
             </div>
+        
         <div class="right">
-                <h1 id="comphead">comp<img id='backofcard2' src="images/backofpokemoncard.jpg" alt="hello"></h1>
-                <div class="CcardImage">Cimage</div>
-                
+                <h1 id="comphead">Ash Ketchum<img id='backofcard2' src="images/backofpokemoncard.jpg" alt="hello"></h1>
+                <div class="CcardImage"></div>
+                <p id='compScore'>compcounter</p> 
+                   
+
             </div>
         </section>
-    
+        <footer><img class='pokeball' src="images/pokeball.png" alt="center"></footer>
 </body>
 </html>

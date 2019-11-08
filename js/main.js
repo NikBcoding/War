@@ -13,7 +13,7 @@
 //                   {key:'L', value: 3},
 //                   {key:'M', value: 2},
 //                   {key:'N', value: 1},  ]
-let cards = [0,0,0,0,0,0,1,1,1,1,1,1,2,2,2,2,2,2,3,3,3,3,3,3,4,4,4,4,4,4,5,5,5,5,5,5,6,6,6,6,6,6,7,7,7,7,7,7,8,8,8,8,8,8,9,9,9,9,9,9,10,10,10,10,10,10,11,11,11,11,11,11,12,12,12,12,12,12,13,13,13,13,13,13,14,14,14,14,14,14,15,15,15,15,15,15,16,16,16,16,16,16,17,17,17,17,17,17,18,18,18,18,18,18,]
+let cards = [1,1,1,1,1,1,2,2,2,2,2,2,3,3,3,3,3,3,4,4,4,4,4,4,5,5,5,5,5,5,6,6,6,6,6,6,7,7,7,7,7,7,8,8,8,8,8,8,9,9,9,9,9,9,10,10,10,10,10,10,11,11,11,11,11,11,12,12,12,12,12,12,13,13,13,13,13,13,14,14,14,14,14,14,15,15,15,15,15,15,16,16,16,16,16,16,17,17,17,17,17,17,18,18,18,18,18,18,19,19,19,19,19,19]
 
 
 //========STATE VARIABLES========//
@@ -22,7 +22,7 @@ const pokemon = {
         Magikarp: 1,
         Rattata: 2,
         Pidgey: 3,
-        Mewoth: 4,
+        Meowth: 4,
         Bulbasaur: 5,
         Squirtle: 6,
         Charmander: 7,
@@ -40,6 +40,7 @@ const pokemon = {
         Charizard: 19
 }
 
+
 var playerSideDeck = [];
 var compSideDeck = [];
 // var playerCard = [];
@@ -50,7 +51,7 @@ let compDeck = []
 let warField = []
 
 function init() {
-        cards = [0,0,0,0,0,0,1,1,1,1,1,1,2,2,2,2,2,2,3,3,3,3,3,3,4,4,4,4,4,4,5,5,5,5,5,5,6,6,6,6,6,6,7,7,7,7,7,7,8,8,8,8,8,8,9,9,9,9,9,9,10,10,10,10,10,10,11,11,11,11,11,11,12,12,12,12,12,12,13,13,13,13,13,13,14,14,14,14,14,14,15,15,15,15,15,15,16,16,16,16,16,16,17,17,17,17,17,17,18,18,18,18,18,18,]
+        cards = [1,1,1,1,1,1,2,2,2,2,2,2,3,3,3,3,3,3,4,4,4,4,4,4,5,5,5,5,5,5,6,6,6,6,6,6,7,7,7,7,7,7,8,8,8,8,8,8,9,9,9,9,9,9,10,10,10,10,10,10,11,11,11,11,11,11,12,12,12,12,12,12,13,13,13,13,13,13,14,14,14,14,14,14,15,15,15,15,15,15,16,16,16,16,16,16,17,17,17,17,17,17,18,18,18,18,18,18,19,19,19,19,19,19]
         playerDeck = [];
         compDeck = [];
         playerVal
@@ -59,6 +60,7 @@ function init() {
         compSideDeck = [];
         warField = [];
         messageEl.textContent = 'Hit PLAY';
+        messageEl2.textContent = '';
         cardFlip.addEventListener('click', handleDraw)
         
 }
@@ -70,8 +72,11 @@ function init() {
 const startGame = document.getElementById('start')
 const cardFlip = document.getElementById("draw")
 const playAgain = document.getElementById('replay')
-const messageEl = document.querySelector('h2')
+const messageEl = document.getElementById('steps')
+const messageEl2 = document.getElementById('whowins')
 const deckEl = document.getElementById("player")
+const PcardImage = document.querySelector('.PcardImage')
+const CcardImage = document.querySelector('.CcardImage')
 
 
 
@@ -89,7 +94,6 @@ playAgain.addEventListener('click', init)
 // playAgain.addEventListener('click', init);
 
 //========FUNCTIONS========//
-// init();
 
 function handleStart(evt) {
         if(evt.target.tagName !== 'BUTTON') {
@@ -114,10 +118,13 @@ function handleStart(evt) {
 }
 
 
+// /Users/nikazbekyan/NBcode/War/images/Dragonite14.jpg.png
+
 let playerVal, compVal, playerWarCards = [], compWarCards = [];
 
 // function handleResetGame(evt){
 //         if(evt.target.tagName === 'BUTTON') 
+
 
 function drawCard() {
         console.log(playerDeck)
@@ -131,6 +138,8 @@ function drawCard() {
         let compDraw = compDeck.splice(0,1);
         compVal = compDraw[0]
         compareCards();
+        PcardImage.innerHTML = `<img id='cardsize' src="images/${playerVal}.png"></img>`
+        CcardImage.innerHTML = `<img id='cardsize' src="images/${compVal}.png"></img>`
    }
 function handleDraw(evt) {
         if (evt.target.tagName === 'BUTTON') 
@@ -141,23 +150,23 @@ function handleDraw(evt) {
 function compareCards() {
        
         if (playerVal > compVal) {
-                messageEl.textContent = "Player PoKemon wins!"
+                messageEl.textContent = "You win Battle!"
                 playerSideDeck.push(playerVal , compVal)
 
         if (warField.length !== 0) {
                 warField.forEach( v => {
                 playerSideDeck.push(v);
         })
-
+        
                 warField = [];
                
         } if (compDeck.length  === 0 && playerSideDeck.length > compSideDeck.length) {
-                messageEl.textContent = "You are the PokeWar Master!"
+                messageEl2.textContent = "You are the PokeWar Master!"
                 cardFlip.removeEventListener('click', handleDraw)
                 return;
                }
                if (playerDeck.length === 0 && compSideDeck.length > playerSideDeck.length) {
-                messageEl.textContent = "Computer is the PokeWar Master!"
+                messageEl2.textContent = "Ash Ketchum is the PokeWar Master!"
                 cardFlip.removeEventListener('click', handleDraw)
                 return;
                 }
@@ -165,7 +174,7 @@ function compareCards() {
            
 
        } else if (compVal > playerVal) {
-                messageEl.textContent = "Computer PoKemon wins!"
+                messageEl.textContent = "Ash Ketchum wins Battle!"
                 compSideDeck.push(playerVal, compVal)
                
                 if (warField.length !== 0) {
@@ -176,12 +185,12 @@ function compareCards() {
                         warField = [];
                 }
                if (playerDeck.length === 0 && compSideDeck.length > playerSideDeck.length) {
-                messageEl.textContent = "Computer is the PokeWar Master!"
+                messageEl2.textContent = "Ash Ketchum is the PokeWar Master!"
                 cardFlip.removeEventListener('click', handleDraw)
                 return;
                }
                if (compDeck.length  === 0 && playerSideDeck.length > compSideDeck.length) {
-                messageEl.textContent = "You are the PokeWar Master!"
+                messageEl2.textContent = "You are the PokeWar Master!"
                 cardFlip.removeEventListener('click', handleDraw)
                 return;
                }
@@ -209,13 +218,13 @@ console.log('HIT')
 
         if (playerDeck.length === 0 && compSideDeck.length > playerSideDeck.length){
                 console.log('Hit3')
-                        messageEl.textContent = "Computer is the PokeWar Master!"
+                        messageEl2.textContent = "Ash Ketchum is the PokeWar Master!"
                         cardFlip.removeEventListener('click', handleDraw)
                         return;
                 }
                 else if (playerDeck.length === 0  && playerSideDeck.length > compSideDeck.length) {
                         console.log('Hit4')
-                        messageEl.textContent = "You are the PokeWar Master!"
+                        messageEl2.textContent = "You are the PokeWar Master!"
                         cardFlip.removeEventListener('click', handleDraw)
                         return;
                 }

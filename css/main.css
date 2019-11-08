@@ -1,18 +1,32 @@
 body {
-    color: white;
-    background-color: black;
+    background-color:#292929;
     /* justify-content: center; */
     align-items: center;
     height: 100%;
 }
 
 header {
+    color: lime;
     text-align: center;
     font-size: 30px;
     font-family: fantasy;
 }
+
+h1{
+    color: black;
+}
+
 h2{
     text-align: center;
+
+}
+
+#whowins{
+    color: lime;
+}
+
+#steps{
+    color: orangered;
 }
 
 .left {
@@ -32,24 +46,15 @@ h2{
     
 }
 
-/* .circle {
-    position: absolute;
-    z-index: 15;
-    top: 29%;
-    background-color: red;
-    width: 60vh;
-    height: 60vh;
-    border-radius: 50%;
-    margin-left: 33%;
-    margin-right: 33%;
-    outline-style: solid;
-    outline-color: black; 
-    
-    
-} */
+
 
 
 #backofcard1, #backofcard2 {
+    height: 250px;
+    width: 190px
+}
+
+#cardsize{
     height: 250px;
     width: 190px
 }
@@ -70,13 +75,32 @@ h2{
 
 .PcardImage{
     text-align: center;
-    margin-top: 300px;
+    margin-top: 200px;
     float: right;
     margin-right: 120px;
 }
 .CcardImage{
     text-align: center;
-    margin-top: 300px;
+    margin-top: 200px;
     float: left;
     margin-left: 120px;
+}
+
+#compScore{
+    margin-top: 400px;
+    margin-left: 500px;
+}
+
+#playerScore{
+    margin-top: 400px;
+    margin-right: 400px;
+}
+
+.pokeball{
+    margin-top: 15%;
+    margin-left: 40%;;
+    height: 250px;
+    width: 250px;
+    transform: rotate(90deg);
+    
 }
