@@ -1,84 +1,60 @@
 //========CONSTANTS========//
-// const cards = [   {key:'A', value: 14},
-//                   {key:'B', value: 13},
-//                   {key:'C', value: 12},
-//                   {key:'D', value: 11},
-//                   {key:'E', value: 10},
-//                   {key:'F', value: 9},
-//                   {key:'G', value: 8},
-//                   {key:'H', value: 7},
-//                   {key:'I', value: 6},
-//                   {key:'J', value: 5},
-//                   {key:'K', value: 4},
-//                   {key:'L', value: 3},
-//                   {key:'M', value: 2},
-//                   {key:'N', value: 1},  ]
+
 let cards = [1,1,1,1,1,1,2,2,2,2,2,2,3,3,3,3,3,3,4,4,4,4,4,4,5,5,5,5,5,5,6,6,6,6,6,6,7,7,7,7,7,7,8,8,8,8,8,8,9,9,9,9,9,9,10,10,10,10,10,10,11,11,11,11,11,11,12,12,12,12,12,12,13,13,13,13,13,13,14,14,14,14,14,14,15,15,15,15,15,15,16,16,16,16,16,16,17,17,17,17,17,17,18,18,18,18,18,18,19,19,19,19,19,19]
 
 
 //========STATE VARIABLES========//
 
-const pokemon = {
-        Magikarp: 1,
-        Rattata: 2,
-        Pidgey: 3,
-        Meowth: 4,
-        Bulbasaur: 5,
-        Squirtle: 6,
-        Charmander: 7,
-        Eevee: 8,
-        Snorlax: 9,
-        Pikachu: 10,
-        Gengar: 11,
-        Arcanine: 12,
-        Mew: 13,
-        Dragonite: 14,
-        Venusaur: 15,
-        Blastoise: 16,
-        Gyarados: 17,
-        Mewtwo: 18,
-        Charizard: 19
-}
-
-
 var playerSideDeck = [];
 var compSideDeck = [];
-// var playerCard = [];
-// var compCard = [];
-// var shuffledDeck;
-let playerDeck = []
-let compDeck = []
-let warField = []
+var playerDeck = [];
+var compDeck = [];
+var warField = [];
+var playerVal = null; 
+var compVal = null;
+var playerWarCards =[];
+var compWarCards=[];
+
+
+//========CACHED ELEMENTS========//
+//this is where the elements would be grabbed from the HTML to be used in JS
+
+let startGame = document.getElementById('start')
+let cardFlip = document.getElementById("draw")
+let playAgain = document.getElementById('replay')
+let messageEl = document.getElementById('steps')
+let messageEl2 = document.getElementById('whowins')
+let PcardImage = document.querySelector('.PcardImage')
+let CcardImage = document.querySelector('.CcardImage')
+let YourCount = document.getElementById('playerScore')
+let CompCount = document.getElementById('compScore')
+let PdeckCount = document.getElementById('PlayerDeckCount')
+let CdeckCount = document.getElementById('CompDeckCount')
+
+// let ashFace = document.querySelector('.ashFace');
+
 
 function init() {
-        cards = [1,1,1,1,1,1,2,2,2,2,2,2,3,3,3,3,3,3,4,4,4,4,4,4,5,5,5,5,5,5,6,6,6,6,6,6,7,7,7,7,7,7,8,8,8,8,8,8,9,9,9,9,9,9,10,10,10,10,10,10,11,11,11,11,11,11,12,12,12,12,12,12,13,13,13,13,13,13,14,14,14,14,14,14,15,15,15,15,15,15,16,16,16,16,16,16,17,17,17,17,17,17,18,18,18,18,18,18,19,19,19,19,19,19]
+        cards = [1,1,1,1,1,1,2,2,2,2,2,2,3,3,3,3,3,3,4,4,4,4,4,4,5,5,5,5,5,5,6,6,6,6,6,6,7,7,7,7,7,7,8,8,8,8,8,8,9,9,9,9,9,9,10,10,10,10,10,10,11,11,11,11,11,11,12,12,12,12,12,12,13,13,13,13,13,13,14,14,14,14,14,14,15,15,15,15,15,15,16,16,16,16,16,16,17,17,17,17,17,17,18,18,18,18,18,18,19,19,19,19,19,19];
         playerDeck = [];
         compDeck = [];
-        playerVal
-        compVal
+        playerVal = null;
+        compVal = null;
         playerSideDeck = [];
         compSideDeck = [];
         warField = [];
-        messageEl.textContent = 'Hit PLAY';
+        messageEl.textContent = 'HIT PLAY';
         messageEl2.textContent = '';
+        PcardImage.innerHTML = '';
+        CcardImage.innerHTML = '';
+        YourCount.innerHTML = '';
+        CompCount.innerHTML = '';
+        PdeckCount.innerHTML = 'Deck Count:';
+        CdeckCount.innerHTML = 'Deck Count:';
+        startGame.style.display = 'inline-block';
         cardFlip.addEventListener('click', handleDraw)
-        
+        // ashFace.className = 'ashFace';
 }
-
-//========CACHED ELEMENTS========//
-// messageEl.ducument.getElementById()
-        //this is where the elements would be grabbed from the HTML to be used in JS
-
-const startGame = document.getElementById('start')
-const cardFlip = document.getElementById("draw")
-const playAgain = document.getElementById('replay')
-const messageEl = document.getElementById('steps')
-const messageEl2 = document.getElementById('whowins')
-const deckEl = document.getElementById("player")
-const PcardImage = document.querySelector('.PcardImage')
-const CcardImage = document.querySelector('.CcardImage')
-
-
 
 //========EVENT LISTENERS========//
         // this will be where I will state the event listener for the player and also at the end of the game, I will state an event listener for the "play again" button.
@@ -103,36 +79,28 @@ function handleStart(evt) {
         dealCards(cards)
         function dealCards(cards) {
                 let count = 0
-        while(cards.length) {
-                let randomCard = Math.floor(Math.random() * (cards.length))
-                let card = cards.splice(randomCard,1)[0]
-        if(count % 2) {
-                playerDeck.push(card)
-        } else {
-                compDeck.push(card)
+                while(cards.length) {
+                        let randomCard = Math.floor(Math.random() * (cards.length))
+                        let card = cards.splice(randomCard,1)[0]
+                if(count % 2) {
+                        playerDeck.push(card)
+                } else {
+                        compDeck.push(card)
+                }
+                count++
+                }
+                messageEl.textContent = 'Who do you choose?';
         }
-        count++
-        }
-   }
-
+        evt.target.style.display = 'none';
 }
 
 
-// /Users/nikazbekyan/NBcode/War/images/Dragonite14.jpg.png
-
-let playerVal, compVal, playerWarCards = [], compWarCards = [];
 
 // function handleResetGame(evt){
 //         if(evt.target.tagName === 'BUTTON') 
 
 
 function drawCard() {
-        console.log(playerDeck)
-        console.log(compDeck)
-        console.log(playerVal)
-        console.log(compVal)
-        console.log(playerSideDeck)
-        console.log(compSideDeck)
         let playerDraw = playerDeck.splice(0,1);
         playerVal = playerDraw[0]
         let compDraw = compDeck.splice(0,1);
@@ -140,7 +108,11 @@ function drawCard() {
         compareCards();
         PcardImage.innerHTML = `<img id='cardsize' src="images/${playerVal}.png"></img>`
         CcardImage.innerHTML = `<img id='cardsize' src="images/${compVal}.png"></img>`
-   }
+   
+        PdeckCount.innerHTML = `Deck Count: ${playerDeck.length}`
+        CdeckCount.innerHTML = `Deck Count: ${compDeck.length}`
+
+        }
 function handleDraw(evt) {
         if (evt.target.tagName === 'BUTTON') 
         drawCard()
@@ -158,15 +130,21 @@ function compareCards() {
                 playerSideDeck.push(v);
         })
         
-                warField = [];
-               
-        } if (compDeck.length  === 0 && playerSideDeck.length > compSideDeck.length) {
+                warField = [];    
+        } 
+                YourCount.innerHTML = `TOTAL CARDS WON: ${playerSideDeck.length}`
+
+                if (compDeck.length  === 0 && playerSideDeck.length > compSideDeck.length) {
+                messageEl.textContent = '';
                 messageEl2.textContent = "You are the PokeWar Master!"
+                // ashFace.classList.add('happy');
                 cardFlip.removeEventListener('click', handleDraw)
                 return;
                }
                if (playerDeck.length === 0 && compSideDeck.length > playerSideDeck.length) {
+                messageEl.textContent = '';
                 messageEl2.textContent = "Ash Ketchum is the PokeWar Master!"
+                // ashFace.classList.add('sad');
                 cardFlip.removeEventListener('click', handleDraw)
                 return;
                 }
@@ -180,20 +158,29 @@ function compareCards() {
                 if (warField.length !== 0) {
                         warField.forEach( v => {
                                 compSideDeck.push(v);
-                        })
+                })
                         
                         warField = [];
                 }
+                
+                CompCount.innerHTML = `TOTAL CARDS WON: ${compSideDeck.length}`
+
                if (playerDeck.length === 0 && compSideDeck.length > playerSideDeck.length) {
+                messageEl.textContent = '';
                 messageEl2.textContent = "Ash Ketchum is the PokeWar Master!"
+                // ashFace.classList.add('happy');
+
                 cardFlip.removeEventListener('click', handleDraw)
                 return;
                }
                if (compDeck.length  === 0 && playerSideDeck.length > compSideDeck.length) {
+                messageEl.textContent = '';
                 messageEl2.textContent = "You are the PokeWar Master!"
+                // ashFace.classList.add('sad');
                 cardFlip.removeEventListener('click', handleDraw)
                 return;
                }
+
 
        } else if (playerVal === compVal) {
                 messageEl.textContent = "WAR!"
@@ -218,13 +205,17 @@ console.log('HIT')
 
         if (playerDeck.length === 0 && compSideDeck.length > playerSideDeck.length){
                 console.log('Hit3')
+                        messageEl.textContent = '';
                         messageEl2.textContent = "Ash Ketchum is the PokeWar Master!"
+                        // ashFace.classList.add('happy');
                         cardFlip.removeEventListener('click', handleDraw)
                         return;
                 }
                 else if (playerDeck.length === 0  && playerSideDeck.length > compSideDeck.length) {
                         console.log('Hit4')
+                        messageEl.textContent = '';
                         messageEl2.textContent = "You are the PokeWar Master!"
+                        // ashFace.classList.add('sad');
                         cardFlip.removeEventListener('click', handleDraw)
                         return;
                 }
@@ -245,8 +236,8 @@ console.log('HIT')
         console.log('Hit6')
         return; 
         }
+        
 }
-
 
 
 

@@ -21,6 +21,10 @@ h2{
 
 }
 
+h6{
+    font-size: 18px;
+}
+
 #whowins{
     color: lime;
 }
@@ -75,32 +79,68 @@ h2{
 
 .PcardImage{
     text-align: center;
-    margin-top: 200px;
+    margin-top: 150px;
     float: right;
     margin-right: 120px;
 }
 .CcardImage{
     text-align: center;
-    margin-top: 200px;
+    margin-top: 150px;
     float: left;
     margin-left: 120px;
 }
 
 #compScore{
-    margin-top: 400px;
-    margin-left: 500px;
+    color: crimson;
+    margin-top: 30px;
+    margin-left: 407px;
 }
 
 #playerScore{
-    margin-top: 400px;
+    color: crimson;
+    margin-top: 30px;
+    margin-left: 30px;
+}
+
+#PlayerDeckCount{
+    margin-left: 30px;
     margin-right: 400px;
+    margin-top: 410px;
+}
+
+#CompDeckCount{
+    margin-top: 428px;
+    margin-left: 407px;
 }
 
 .pokeball{
-    margin-top: 15%;
-    margin-left: 40%;;
+    margin-top: 13%;
+    margin-left: 40%;
     height: 250px;
     width: 250px;
     transform: rotate(90deg);
-    
 }
+
+
+
+/* .ashFace {
+    display: none;
+    background-size: contain;
+    margin-top: 13%;
+    margin-left: 40%;;
+    height: 50px;
+    width: 50px;
+
+}
+
+.ashFace.happy {
+    display: inline-block;
+    background-color: red;
+    background-image: url();
+}
+
+.ashFace.sad {
+    display: inline-block;
+    background-color: blue;
+    background-image: url();
+} */
