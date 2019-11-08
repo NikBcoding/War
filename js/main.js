@@ -57,7 +57,7 @@ function init() {
 }
 
 //========EVENT LISTENERS========//
-        // this will be where I will state the event listener for the player and also at the end of the game, I will state an event listener for the "play again" button.
+        // this will be the area where I will state the event listener for the player and also at the end of the game, I will state an event listener for the "play again" button, as well as, drawing each card from deck to be compared.
 
 startGame.addEventListener('click', handleStart)
 
@@ -67,9 +67,8 @@ playAgain.addEventListener('click', init)
 
 
 
-// playAgain.addEventListener('click', init);
-
 //========FUNCTIONS========//
+        // this is where my functions will be ran.
 
 function handleStart(evt) {
         if(evt.target.tagName !== 'BUTTON') {
@@ -94,10 +93,6 @@ function handleStart(evt) {
         evt.target.style.display = 'none';
 }
 
-
-
-// function handleResetGame(evt){
-//         if(evt.target.tagName === 'BUTTON') 
 
 
 function drawCard() {
@@ -134,7 +129,7 @@ function compareCards() {
         } 
                 YourCount.innerHTML = `TOTAL CARDS WON: ${playerSideDeck.length}`
 
-                if (compDeck.length  === 0 && playerSideDeck.length > compSideDeck.length) {
+                if (compDeck.length === 0 && playerSideDeck.length > compSideDeck.length) {
                 messageEl.textContent = '';
                 messageEl2.textContent = "You are the PokeWar Master!"
                 // ashFace.classList.add('happy');
@@ -173,9 +168,16 @@ function compareCards() {
                 cardFlip.removeEventListener('click', handleDraw)
                 return;
                }
-               if (compDeck.length  === 0 && playerSideDeck.length > compSideDeck.length) {
+               if (compDeck.length === 0 && playerSideDeck.length > compSideDeck.length) {
                 messageEl.textContent = '';
                 messageEl2.textContent = "You are the PokeWar Master!"
+                // ashFace.classList.add('sad');
+                cardFlip.removeEventListener('click', handleDraw)
+                return;
+               }
+               if (compDeck.length  === 0 && playerSideDeck.length === compSideDeck.length) {
+                messageEl.textContent = '';
+                messageEl2.textContent = "Tie, What a Game!"
                 // ashFace.classList.add('sad');
                 cardFlip.removeEventListener('click', handleDraw)
                 return;
@@ -190,13 +192,10 @@ function compareCards() {
     
 }
         
-// create the tie function 
 function tie() {
 
         warField.push(playerVal, compVal)
-console.log('HIT')
         if (playerDeck.length <= 4 && playerDeck.length > 0){
-                console.log('Hit2')
                 drawCard();
                 compareCards();
                 return;
@@ -204,7 +203,6 @@ console.log('HIT')
         }
 
         if (playerDeck.length === 0 && compSideDeck.length > playerSideDeck.length){
-                console.log('Hit3')
                         messageEl.textContent = '';
                         messageEl2.textContent = "Ash Ketchum is the PokeWar Master!"
                         // ashFace.classList.add('happy');
@@ -212,7 +210,6 @@ console.log('HIT')
                         return;
                 }
                 else if (playerDeck.length === 0  && playerSideDeck.length > compSideDeck.length) {
-                        console.log('Hit4')
                         messageEl.textContent = '';
                         messageEl2.textContent = "You are the PokeWar Master!"
                         // ashFace.classList.add('sad');
@@ -221,7 +218,6 @@ console.log('HIT')
                 }
         
          else if (playerDeck.length >= 5){
-                console.log('Hit5')
                 playerWarCards = playerDeck.splice(0,4)
                 compWarCards = compDeck.splice(0,4)
                 
@@ -233,18 +229,26 @@ console.log('HIT')
                         return;
                 })
 } else {
-        console.log('Hit6')
         return; 
         }
         
 }
 
+        //at start of game, a deck of 114 cards (19 different cards of 6 each) gets dealt to both players evenly (57 cards to each player).
 
+        //with each turn a card is fliped face up from each player's decks and gets compared based of their value.
 
-        //if playerCard > compCard, player takes both cards and places them face up next to his/her current playing deck which is faced down.
-        //if playerCard < compCard, comp takes bith cards and they are placed next to it's current playing deck which is faced down.
+        //if playerCard > compCard, player wins the battle and takes both cards and places them next to his/her current playing deck, into a pile called "TOTAL CARDS WON".
+        
+        //if playerCard < compCard, comp wins the battle and takes both cards and are placed next to it's current playing deck, into a pile called "TOTAL CARDS WON".
 
-        //if playerCard == compCard,  top 5 cards from each deck will be placed face down on the play field and the 6th card will be faced up to declare winner.
+        //if playerCard === compCard, "WAR" is declared.  Top 4 cards from each deck will be placed in the  "Warfield" and the 5th card will be fliped face up to declare the winner.  The winner receives all the cards played that round, total of 12.
+
+        //if tie occurs again, 4 more cards will be added and 5th card will be flipped face up to declare a winner, and so on so forth, until a winner is met. 
+
+        //if playerCard === compCard and each player has <=4 cards remaining in their Deck Count, the players draw a card from their deck to see who wins the current cards and the previous 2 cards that were originally tied.
+
+        //game goes on until both players have no more cards left in their Deck Count, which at that point the winner of WAR is declared based on who has more cards in their "TOTAL CARDS WON" pile.
 
 //========DISPLAYED MESSAGES========//
 

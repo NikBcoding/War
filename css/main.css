@@ -1,14 +1,13 @@
 body {
     background-color:#292929;
-    /* justify-content: center; */
     align-items: center;
     height: 100%;
 }
 
 header {
-    color: lime;
+    color: #E8001E;
     text-align: center;
-    font-size: 30px;
+    font-size: 42px;
     font-family: fantasy;
 }
 
@@ -30,7 +29,7 @@ h6{
 }
 
 #steps{
-    color: orangered;
+    color: yellow;
 }
 
 .left {
@@ -38,7 +37,7 @@ h6{
     position: absolute;
     left: 0px;
     width: 49.5%;
-    height: 80%
+    height: 76%
 }
   
 .right {
@@ -46,12 +45,9 @@ h6{
     position: absolute;
     right: 0px;
     width: 49.5%;
-    height: 80%
+    height: 76%
     
 }
-
-
-
 
 #backofcard1, #backofcard2 {
     height: 250px;
@@ -120,6 +116,18 @@ h6{
     width: 250px;
     transform: rotate(90deg);
 }
+button{
+    margin-bottom: 8px;
+    background-color: red;
+    height: 20px;
+    border-radius: 10%;
+    font-size: 14px;
+    color: black;
+    border: red;
+    font-weight: bold;
+    outline: none;
+}
+
 
 
 
