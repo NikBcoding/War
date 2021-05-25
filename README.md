@@ -57,4 +57,4 @@ TECHNOLOGIES
 
 NEXT STEPS
 
-I want to inclide some sound, include more pokemon, add some minor 	animations that shows a pokeball fly when a card is being drawn, as 	well as showing cartoon face of Ash Ketchum; either have a happy 	face or a sad face depending on if he won or lost.
+I want to include some sound, include more pokemon, add some minor animations that shows a pokeball fly when a card is being drawn, as 	well as showing cartoon face of Ash Ketchum; either have a happy face or a sad face depending on if he won or lost.
